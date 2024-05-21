@@ -1,4 +1,4 @@
-package br.com.fiap.cidadelimpa.cidadelimpa;
+package br.com.fiap.cidadelimpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
