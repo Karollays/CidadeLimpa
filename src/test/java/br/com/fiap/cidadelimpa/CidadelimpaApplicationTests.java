@@ -1,4 +1,4 @@
-package br.com.fiap.cidadelimpa.cidadelimpa;
+package br.com.fiap.cidadelimpa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
