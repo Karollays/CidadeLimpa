@@ -1,6 +1,6 @@
 package br.com.fiap.cidadelimpa.dto;
 
-import br.com.fiap.contatos.model.UsuarioRole;
+import br.com.fiap.cidadelimpa.model.UsuarioRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
