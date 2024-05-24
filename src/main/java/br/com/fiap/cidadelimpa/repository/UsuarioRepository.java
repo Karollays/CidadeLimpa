@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    @Query("SELECT c FROM Contato c WHERE c.nome = :nome")
+    @Query("SELECT c FROM Usuario c WHERE c.nome = :nome")
     Optional<Usuario> findByNome(@Param("nome") String nome);
 
 
