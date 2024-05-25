@@ -1,7 +1,9 @@
 package br.com.fiap.cidadelimpa.controller;
 
-import br.com.fiap.cidadelimpa.model.Coleta;
+import br.com.fiap.cidadelimpa.dto.ColetaCadastroDto;
+import br.com.fiap.cidadelimpa.dto.ColetaExibicaoDto;
 import br.com.fiap.cidadelimpa.service.ColetaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,25 +19,25 @@ public class ColetaController {
 
     @PostMapping("/coletas")
     @ResponseStatus(HttpStatus.CREATED)
-    public Coleta salvar(@RequestBody Coleta coleta) {
-        return coletaService.salvar(coleta);
+    public ColetaExibicaoDto salvar(@RequestBody @Valid ColetaCadastroDto coletaCadastroDto) {
+        return coletaService.salvar(coletaCadastroDto);
     }
 
     @GetMapping("/coletas/{coletaId}")
-    public Coleta buscar(@PathVariable Long coletaId) {
+    @ResponseStatus(HttpStatus.OK)
+    public ColetaExibicaoDto buscar(@PathVariable Long coletaId) {
         return coletaService.buscar(coletaId);
     }
 
     @GetMapping("/coletas")
     @ResponseStatus(HttpStatus.OK)
-    public List<Coleta> listarColetas() {
+    public List<ColetaExibicaoDto> listarColetas() {
         return coletaService.listarColetas();
     }
 
     @PutMapping("/coletas")
-    @ResponseStatus(HttpStatus.OK)
-    public Coleta atualizar(@RequestBody Coleta coleta) {
-        return coletaService.atualizar(coleta);
+    public ColetaExibicaoDto atualizar(@RequestBody @Valid ColetaCadastroDto coletaCadastroDto) {
+        return coletaService.atualizar(coletaCadastroDto);
     }
 
     @DeleteMapping("/coletas/{coletaId}")

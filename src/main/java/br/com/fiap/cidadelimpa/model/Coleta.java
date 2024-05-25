@@ -2,10 +2,11 @@ package br.com.fiap.cidadelimpa.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
-@Table(name ="T_COLETA")
+@Table(name = "T_COLETA")
 @Getter
 @Setter
 @NoArgsConstructor
