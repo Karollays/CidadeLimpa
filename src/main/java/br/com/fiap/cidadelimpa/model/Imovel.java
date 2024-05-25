@@ -2,10 +2,12 @@ package br.com.fiap.cidadelimpa.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name ="T_IMOVEL")
+@Table(name = "T_IMOVEL")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,6 +34,6 @@ public class Imovel {
     private Double reciclavel;
     @Column(name = "lx_organico")
     private Double organico;
-    @OneToMany (mappedBy = "imovel")
-    private List<Morador> moradores;
+    @OneToMany(mappedBy = "imovel")
+    private List<Morador> moradores = new ArrayList<>();
 }
