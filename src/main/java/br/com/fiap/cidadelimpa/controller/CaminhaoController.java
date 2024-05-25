@@ -29,12 +29,6 @@ public class CaminhaoController {
         return caminhaoService.buscar(caminhaoId);
     }
 
-    @GetMapping("/caminhoes")
-    @ResponseStatus(HttpStatus.OK)
-    public List<CaminhaoExibicaoDto> litarCaminhaoes() {
-        return caminhaoService.listarCaminhoes();
-    }
-
     @PutMapping("/caminhoes")
     public CaminhaoExibicaoDto atualizar(@RequestBody @Valid CaminhaoCadastroDto caminhaoCadastroDto) {
         return caminhaoService.atualizar(caminhaoCadastroDto);
@@ -44,5 +38,17 @@ public class CaminhaoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long caminhaoId) {
         caminhaoService.deletar(caminhaoId);
+    }
+
+    @GetMapping("/caminhoes")
+    @ResponseStatus(HttpStatus.OK)
+    public List<CaminhaoExibicaoDto> litarCaminhoes() {
+        return caminhaoService.listarCaminhoes();
+    }
+
+    @PostMapping("/caminhoes/descarregar")
+    @ResponseStatus(HttpStatus.OK)
+    public void descarregarCaminhoes() {
+        caminhaoService.descarregarCaminhoes();
     }
 }

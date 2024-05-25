@@ -46,6 +46,12 @@ public class ImovelController {
         imovelService.deletar(imovelId);
     }
 
+    @GetMapping(value = "/imoveis", params = "bairro")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ImovelExibicaoDto> buscarBairro(@RequestParam String bairro) {
+        return imovelService.buscarBairro(bairro);
+    }
+
     @PostMapping("/imoveis/lixo")
     @ResponseStatus(HttpStatus.OK)
     public void gerarLixo() {

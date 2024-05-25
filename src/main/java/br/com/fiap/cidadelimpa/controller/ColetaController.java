@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,20 +30,25 @@ public class ColetaController {
         return coletaService.buscar(coletaId);
     }
 
-    @GetMapping("/coletas")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ColetaExibicaoDto> listarColetas() {
-        return coletaService.listarColetas();
-    }
-
     @PutMapping("/coletas")
+    @ResponseStatus(HttpStatus.OK)
     public ColetaExibicaoDto atualizar(@RequestBody @Valid ColetaCadastroDto coletaCadastroDto) {
-        return coletaService.atualizar(coletaCadastroDto);
-    }
+        return coletaService.atualizar(coletaCadastroDto);}
 
     @DeleteMapping("/coletas/{coletaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long coletaId) {
         coletaService.deletar(coletaId);
     }
-}
+
+    @GetMapping("/coletas")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ColetaExibicaoDto> listarColetas() {
+        return coletaService.listarColetas();
+    }
+
+    @GetMapping(value = "/coletas", params = {"dataInicio", "dataFinal"})
+    @ResponseStatus(HttpStatus.OK)
+    public List<ColetaExibicaoDto> listarPeriodo(@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFinal) {
+        return coletaService.listarPeriodo(dataInicio, dataFinal);
+    }}

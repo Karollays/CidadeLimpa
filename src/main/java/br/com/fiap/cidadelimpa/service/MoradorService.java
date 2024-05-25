@@ -11,6 +11,7 @@ import br.com.fiap.cidadelimpa.repository.ImovelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class MoradorService {
     @Autowired
     private ImovelRepository imovelRepository;
 
+    @Transactional
     public MoradorExibicaoDto salvar(MoradorCadastroDto moradorCadastroDto) {
         Morador morador = new Morador();
         BeanUtils.copyProperties(moradorCadastroDto, morador);
@@ -33,6 +35,7 @@ public class MoradorService {
         return new MoradorExibicaoDto(moradorRepository.save(morador));
     }
 
+    @Transactional(readOnly = true)
     public MoradorExibicaoDto buscar(Long id) {
         Optional<Morador> moradorOptional = moradorRepository.findById(id);
         if (moradorOptional.isPresent()) {
@@ -42,14 +45,7 @@ public class MoradorService {
         }
     }
 
-    public List<MoradorExibicaoDto> listarMoradores() {
-        return moradorRepository
-                .findAll()
-                .stream()
-                .map(MoradorExibicaoDto::new)
-                .toList();
-    }
-
+    @Transactional
     public MoradorExibicaoDto atualizar(MoradorCadastroDto moradorCadastroDto) {
         Morador morador = moradorRepository.findById(moradorCadastroDto.id())
                 .orElseThrow(() -> new MoradorNaoExisteException("Morador não encontrado."));
@@ -61,6 +57,7 @@ public class MoradorService {
         return new MoradorExibicaoDto(moradorRepository.save(morador));
     }
 
+    @Transactional
     public void deletar(Long id) {
         Optional<Morador> moradorOptional = moradorRepository.findById(id);
         if (moradorOptional.isPresent()) {
@@ -68,5 +65,14 @@ public class MoradorService {
         } else {
             throw new MoradorNaoExisteException("Morador não encontrado.");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<MoradorExibicaoDto> listarMoradores() {
+        return moradorRepository
+                .findAll()
+                .stream()
+                .map(MoradorExibicaoDto::new)
+                .toList();
     }
 }

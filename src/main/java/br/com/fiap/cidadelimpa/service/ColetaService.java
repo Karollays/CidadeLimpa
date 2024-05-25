@@ -14,7 +14,9 @@ import br.com.fiap.cidadelimpa.repository.ImovelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +30,7 @@ public class ColetaService {
     @Autowired
     private ImovelRepository imovelRepository;
 
+    @Transactional
     public ColetaExibicaoDto salvar(ColetaCadastroDto coletaCadastroDto) {
         Coleta coleta = new Coleta();
         BeanUtils.copyProperties(coletaCadastroDto, coleta);
@@ -40,6 +43,7 @@ public class ColetaService {
         return new ColetaExibicaoDto(coletaRepository.save(coleta));
     }
 
+    @Transactional(readOnly = true)
     public ColetaExibicaoDto buscar(Long id) {
         Optional<Coleta> coletaOptional = coletaRepository.findById(id);
         if (coletaOptional.isPresent()) {
@@ -49,14 +53,7 @@ public class ColetaService {
         }
     }
 
-    public List<ColetaExibicaoDto> listarColetas() {
-        return coletaRepository
-                .findAll()
-                .stream()
-                .map(ColetaExibicaoDto::new)
-                .toList();
-    }
-
+    @Transactional
     public ColetaExibicaoDto atualizar(ColetaCadastroDto coletaCadastroDto) {
         Coleta coleta = coletaRepository.findById(coletaCadastroDto.id())
                 .orElseThrow(() -> new ColetaNaoExisteException("Coleta não encontrada."));
@@ -70,6 +67,7 @@ public class ColetaService {
         return new ColetaExibicaoDto(coletaRepository.save(coleta));
     }
 
+    @Transactional
     public void deletar(Long id) {
         Optional<Coleta> coletaOptional = coletaRepository.findById(id);
         if (coletaOptional.isPresent()) {
@@ -77,5 +75,23 @@ public class ColetaService {
         } else {
             throw new ColetaNaoExisteException("Coleta não encontrada.");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<ColetaExibicaoDto> listarColetas() {
+        return coletaRepository
+                .findAll()
+                .stream()
+                .map(ColetaExibicaoDto::new)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ColetaExibicaoDto> listarPeriodo(LocalDate dataInicial, LocalDate dataFinal) {
+        return coletaRepository
+                .listarPeriodo(dataInicial, dataFinal)
+                .stream()
+                .map(ColetaExibicaoDto::new)
+                .toList();
     }
 }

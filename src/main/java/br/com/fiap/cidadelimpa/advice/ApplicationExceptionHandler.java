@@ -11,6 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +26,14 @@ public class ApplicationExceptionHandler {
     public Map<String, String> handleHttpMessageNotReadableException(HttpMessageNotReadableException error) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("mensagem", "Erro de leitura da mensagem HTTP: " + error.getMessage());
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NoResourceFoundException.class)
+    public Map<String, String> handleNoResourceFoundException(NoResourceFoundException error) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("mensagem", "Parametro não informado: " + error.getResourcePath());
         return errorMap;
     }
 

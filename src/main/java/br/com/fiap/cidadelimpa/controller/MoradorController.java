@@ -29,13 +29,8 @@ public class MoradorController {
         return moradorService.buscar(moradorId);
     }
 
-    @GetMapping("/moradores")
-    @ResponseStatus(HttpStatus.OK)
-    public List<MoradorExibicaoDto> litarMoradores() {
-        return moradorService.listarMoradores();
-    }
-
     @PutMapping("/moradores")
+    @ResponseStatus(HttpStatus.OK)
     public MoradorExibicaoDto atualizar(@RequestBody @Valid MoradorCadastroDto moradorCadastroDto) {
         return moradorService.atualizar(moradorCadastroDto);
     }
@@ -44,5 +39,11 @@ public class MoradorController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long moradorId) {
         moradorService.deletar(moradorId);
+    }
+
+    @GetMapping("/moradores")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MoradorExibicaoDto> litarMoradores() {
+        return moradorService.listarMoradores();
     }
 }
