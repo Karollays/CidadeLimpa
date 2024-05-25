@@ -39,10 +39,10 @@ public class SecurityConfig {
                         // Acionando a gravação POST para usuários ADMIN
                           .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                           .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                          .requestMatchers(HttpMethod.GET, "/api/contatos").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
-                          .requestMatchers(HttpMethod.POST, "/api/contatos").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
-                          .requestMatchers(HttpMethod.PUT, "/api/contatos").hasRole("ADMIN")
-                          .requestMatchers(HttpMethod.DELETE, "/api/contatos").hasRole("ADMIN")
+                          .requestMatchers(HttpMethod.GET, "/api/usuarios").hasAnyRole("ADMIN", "USER") // Pode adicionar mais "MANAGER", etc
+                          .requestMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN") // Pode adicionar mais "MANAGER", etc
+                          .requestMatchers(HttpMethod.PUT, "/api/usuarios").hasRole("ADMIN")
+                          .requestMatchers(HttpMethod.DELETE, "/api/usuarios").hasRole("ADMIN")
                           .anyRequest()
                           .authenticated())
                 .addFilterBefore(
