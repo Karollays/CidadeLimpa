@@ -5,6 +5,8 @@ import br.com.fiap.cidadelimpa.dto.ColetaExibicaoDto;
 import br.com.fiap.cidadelimpa.service.ColetaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +35,8 @@ public class ColetaController {
     @PutMapping("/coletas")
     @ResponseStatus(HttpStatus.OK)
     public ColetaExibicaoDto atualizar(@RequestBody @Valid ColetaCadastroDto coletaCadastroDto) {
-        return coletaService.atualizar(coletaCadastroDto);}
+        return coletaService.atualizar(coletaCadastroDto);
+    }
 
     @DeleteMapping("/coletas/{coletaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -43,8 +46,8 @@ public class ColetaController {
 
     @GetMapping("/coletas")
     @ResponseStatus(HttpStatus.OK)
-    public List<ColetaExibicaoDto> listarColetas() {
-        return coletaService.listarColetas();
+    public Page<ColetaExibicaoDto> listarColetas(Pageable paginacao) {
+        return coletaService.listarColetas(paginacao);
     }
 
     @GetMapping(value = "/coletas", params = {"dataInicio", "dataFinal"})
@@ -52,6 +55,7 @@ public class ColetaController {
     public List<ColetaExibicaoDto> listarPeriodo(@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFinal) {
         return coletaService.listarPeriodo(dataInicio, dataFinal);
     }
+<<<<<<< HEAD
 
 //    @PostMapping("/coletas/agendar")
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -66,3 +70,6 @@ public class ColetaController {
 //        return coletaService.agendarColeta(idCaminhao, idImovel, tipoColeta, dataColeta);
 //    }
 }
+=======
+}
+>>>>>>> 72eda38acf32585f6645066a8c678a0ec86211d8

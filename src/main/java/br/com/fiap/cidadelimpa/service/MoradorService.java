@@ -10,6 +10,8 @@ import br.com.fiap.cidadelimpa.repository.MoradorRepository;
 import br.com.fiap.cidadelimpa.repository.ImovelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,11 +70,9 @@ public class MoradorService {
     }
 
     @Transactional(readOnly = true)
-    public List<MoradorExibicaoDto> listarMoradores() {
+    public Page<MoradorExibicaoDto> listarMoradores(Pageable paginacao) {
         return moradorRepository
-                .findAll()
-                .stream()
-                .map(MoradorExibicaoDto::new)
-                .toList();
+                .findAll(paginacao)
+                .map(MoradorExibicaoDto::new);
     }
 }
