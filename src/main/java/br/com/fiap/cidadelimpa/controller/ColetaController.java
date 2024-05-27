@@ -51,4 +51,18 @@ public class ColetaController {
     @ResponseStatus(HttpStatus.OK)
     public List<ColetaExibicaoDto> listarPeriodo(@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFinal) {
         return coletaService.listarPeriodo(dataInicio, dataFinal);
-    }}
+    }
+
+//    @PostMapping("/coletas/agendar")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ColetaExibicaoDto agendarColeta(@RequestBody @Valid ColetaCadastroDto coletaCadastroDto) {
+//        // Extrai os dados do DTO de cadastro
+//        LocalDate dataColeta = coletaCadastroDto.dataColeta();
+//        Long idCaminhao = coletaCadastroDto.caminhaoId();
+//        Long idImovel = coletaCadastroDto.imovelId();
+//        String tipoColeta = coletaCadastroDto.tipoColeta();
+//
+//        // Chama o serviço para agendar a coleta
+//        return coletaService.agendarColeta(idCaminhao, idImovel, tipoColeta, dataColeta);
+//    }
+}

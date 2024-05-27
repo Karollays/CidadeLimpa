@@ -4,6 +4,7 @@ import br.com.fiap.cidadelimpa.dto.CaminhaoExibicaoDto;
 import br.com.fiap.cidadelimpa.dto.CaminhaoCadastroDto;
 import br.com.fiap.cidadelimpa.exception.CaminhaoNaoExisteException;
 import br.com.fiap.cidadelimpa.model.Caminhao;
+import br.com.fiap.cidadelimpa.model.Imovel;
 import br.com.fiap.cidadelimpa.repository.CaminhaoRepository;
 import br.com.fiap.cidadelimpa.repository.ImovelRepository;
 import org.springframework.beans.BeanUtils;
@@ -73,5 +74,44 @@ public class CaminhaoService {
             caminhao.setCapacidade(0.0);
         }
         caminhaoRepository.saveAll(caminhoes);
+    }
+
+    @Transactional
+    public void retirarLixo(Long idCaminhao, Long idImovel, String tipoColeta) {
+        Optional<Caminhao> caminhaoOptional = caminhaoRepository.findById(idCaminhao);
+        Optional<Imovel> imovelOptional = imovelRepository.findById(idImovel);
+
+        if (caminhaoOptional.isPresent() && imovelOptional.isPresent()) {
+            Caminhao caminhao = caminhaoOptional.get();
+            Imovel imovel = imovelOptional.get();
+
+            double quantidadeLixoRetirado = 0.0;
+
+            // Verifica o tipo de coleta e calcula a quantidade de lixo retirada
+            if ("reciclavel".equals(tipoColeta)) {
+                quantidadeLixoRetirado = imovel.getReciclavel();
+            } else if ("organico".equals(tipoColeta)) {
+                quantidadeLixoRetirado = imovel.getOrganico();
+            } else {
+                throw new IllegalArgumentException("Tipo de coleta inválido: " + tipoColeta);
+            }
+
+            // Define a capacidade do caminhão como a quantidade de lixo retirada
+            caminhao.setCapacidade(quantidadeLixoRetirado + caminhao.getCapacidade());
+
+            // Define a quantidade de lixo no imóvel como zero, dependendo do tipo de coleta
+            if ("reciclavel".equals(tipoColeta)) {
+                imovel.setReciclavel(0.0);
+            } else if ("organico".equals(tipoColeta)) {
+                imovel.setOrganico(0.0);
+            }
+
+            // Salva as alterações no caminhão e no imóvel
+            caminhaoRepository.save(caminhao);
+            imovelRepository.save(imovel);
+
+        } else {
+            throw new CaminhaoNaoExisteException("Caminhao ou imovel nao encontrado");
+        }
     }
 }

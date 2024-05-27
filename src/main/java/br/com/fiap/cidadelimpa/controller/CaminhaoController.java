@@ -51,4 +51,9 @@ public class CaminhaoController {
     public void descarregarCaminhoes() {
         caminhaoService.descarregarCaminhoes();
     }
+
+    @PostMapping("/caminhoes/{idCaminhao}/retirar-lixo/{idImovel}/{tipoColeta}")
+    public void retirarLixoDoImovel(@PathVariable Long idCaminhao, @PathVariable Long idImovel, @PathVariable String tipoColeta) {
+        caminhaoService.retirarLixo(idCaminhao, idImovel, tipoColeta);
+    }
 }
