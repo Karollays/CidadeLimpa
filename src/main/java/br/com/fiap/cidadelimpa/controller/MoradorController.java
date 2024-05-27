@@ -5,10 +5,10 @@ import br.com.fiap.cidadelimpa.dto.MoradorExibicaoDto;
 import br.com.fiap.cidadelimpa.service.MoradorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -43,7 +43,7 @@ public class MoradorController {
 
     @GetMapping("/moradores")
     @ResponseStatus(HttpStatus.OK)
-    public List<MoradorExibicaoDto> litarMoradores() {
-        return moradorService.listarMoradores();
+    public Page<MoradorExibicaoDto> litarMoradores(Pageable paginacao) {
+        return moradorService.listarMoradores(paginacao);
     }
 }

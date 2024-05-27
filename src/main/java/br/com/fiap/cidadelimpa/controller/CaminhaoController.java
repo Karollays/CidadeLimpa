@@ -5,10 +5,10 @@ import br.com.fiap.cidadelimpa.dto.CaminhaoExibicaoDto;
 import br.com.fiap.cidadelimpa.service.CaminhaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -42,8 +42,8 @@ public class CaminhaoController {
 
     @GetMapping("/caminhoes")
     @ResponseStatus(HttpStatus.OK)
-    public List<CaminhaoExibicaoDto> litarCaminhoes() {
-        return caminhaoService.listarCaminhoes();
+    public Page<CaminhaoExibicaoDto> litarCaminhoes(Pageable paginacao) {
+        return caminhaoService.listarCaminhoes(paginacao);
     }
 
     @PostMapping("/caminhoes/descarregar")
