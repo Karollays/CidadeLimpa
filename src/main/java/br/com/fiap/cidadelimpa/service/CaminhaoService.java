@@ -76,7 +76,6 @@ public class CaminhaoService {
         caminhaoRepository.saveAll(caminhoes);
     }
 
-<<<<<<< HEAD
     @Transactional
     public void retirarLixo(Long idCaminhao, Long idImovel, String tipoColeta) {
         Optional<Caminhao> caminhaoOptional = caminhaoRepository.findById(idCaminhao);
@@ -115,27 +114,5 @@ public class CaminhaoService {
             throw new CaminhaoNaoExisteException("Caminhao ou imovel nao encontrado");
         }
     }
-=======
-//    public void retirarLixo(Long idCaminhao, Long idImovel) {
-//        Optional<Caminhao> caminhaoOptional = caminhaoRepository.findById(idCaminhao);
-//        Optional<Imovel> imovelOptional = imovelRepository.findById(idImovel);
-//
-//        if (caminhaoOptional.isPresent() && imovelOptional.isPresent()) {
-//            Caminhao caminhao = caminhaoOptional.get();
-//            Imovel imovel = imovelOptional.get();
-//
-//            //Logica para retirar o lixo do imovel
-//            double quantidadeLixoRetirado = imovel.getOrganico() + imovel.getReciclavel();
-//
-//            //Atualiza a quantidade de lixo no imovel
-//            imovel.setOrganico(imovel.getOrganico() - quantidadeLixoRetirado);
-//            System.out.println("Quantidade de lixo = " + quantidadeLixoRetirado);
-//            //salva as alterações no imovel
-//            imovelRepository.save(imovel);
-//
-//        } else {
-//            throw new CaminhaoNaoExisteException("Caminhao ou imovel nao encontrado");
-//        }
-//    }
->>>>>>> 72eda38acf32585f6645066a8c678a0ec86211d8
+
 }

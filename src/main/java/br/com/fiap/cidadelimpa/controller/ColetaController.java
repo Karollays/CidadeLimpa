@@ -55,7 +55,7 @@ public class ColetaController {
     public List<ColetaExibicaoDto> listarPeriodo(@RequestParam LocalDate dataInicio, @RequestParam LocalDate dataFinal) {
         return coletaService.listarPeriodo(dataInicio, dataFinal);
     }
-<<<<<<< HEAD
+
 
 //    @PostMapping("/coletas/agendar")
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -70,6 +70,3 @@ public class ColetaController {
 //        return coletaService.agendarColeta(idCaminhao, idImovel, tipoColeta, dataColeta);
 //    }
 }
-=======
-}
->>>>>>> 72eda38acf32585f6645066a8c678a0ec86211d8
