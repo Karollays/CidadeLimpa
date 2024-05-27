@@ -1,5 +1,7 @@
 package br.com.fiap.cidadelimpa.controller;
 
+import br.com.fiap.cidadelimpa.dto.MoradorCadastroDto;
+import br.com.fiap.cidadelimpa.dto.MoradorExibicaoDto;
 import br.com.fiap.cidadelimpa.dto.UsuarioCadastroDto;
 import br.com.fiap.cidadelimpa.dto.UsuarioExibicaoDto;
 import br.com.fiap.cidadelimpa.model.Usuario;
@@ -33,9 +35,15 @@ public class UsuarioController {
 
     @PutMapping("/usuarios")
     @ResponseStatus(HttpStatus.OK)
-    public Usuario atualizar(@RequestBody @Valid Usuario usuario) {
-        return usuarioService.atualizar(usuario);
+    public UsuarioExibicaoDto atualizar(@RequestBody @Valid UsuarioCadastroDto usuarioCadastroDto) {
+        return usuarioService.atualizar(usuarioCadastroDto);
     }
+
+//    @PutMapping("/moradores")
+//    @ResponseStatus(HttpStatus.OK)
+//    public MoradorExibicaoDto atualizar(@RequestBody @Valid MoradorCadastroDto moradorCadastroDto) {
+//        return moradorService.atualizar(moradorCadastroDto);
+//    }
 
     @DeleteMapping("/usuarios/{usuarioId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

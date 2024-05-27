@@ -1,8 +1,12 @@
 package br.com.fiap.cidadelimpa.service;
 
+import br.com.fiap.cidadelimpa.dto.CaminhaoCadastroDto;
+import br.com.fiap.cidadelimpa.dto.CaminhaoExibicaoDto;
 import br.com.fiap.cidadelimpa.dto.UsuarioCadastroDto;
 import br.com.fiap.cidadelimpa.dto.UsuarioExibicaoDto;
+import br.com.fiap.cidadelimpa.exception.CaminhaoNaoExisteException;
 import br.com.fiap.cidadelimpa.exception.UsuarioNaoExisteException;
+import br.com.fiap.cidadelimpa.model.Caminhao;
 import br.com.fiap.cidadelimpa.model.Usuario;
 import br.com.fiap.cidadelimpa.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
@@ -67,16 +71,29 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario atualizar(Usuario usuario) {
+    public UsuarioExibicaoDto atualizar(UsuarioCadastroDto usuarioCadastroDto) {
 
-        Optional<Usuario> usuarioOptional =
-                usuarioRepository.findById(usuario.getId());
+        Usuario usuario = usuarioRepository.findById(usuarioCadastroDto.id())
+                .orElseThrow(() -> new UsuarioNaoExisteException("Usuário não encontrado."));
+        BeanUtils.copyProperties(usuarioCadastroDto, usuario);
+        return new UsuarioExibicaoDto(usuarioRepository.save(usuario));
 
-        if(usuarioOptional.isPresent()){
-            return usuarioRepository.save(usuario);
-        } else {
-            throw new RuntimeException("Usuário não encontrado");
-        }
+//        Optional<Usuario> usuarioOptional =
+//                usuarioRepository.findById(usuario.getId());
+//
+//        if(usuarioOptional.isPresent()){
+//            return usuarioRepository.save(usuario);
+//        } else {
+//            throw new RuntimeException("Usuário não encontrado");
+
+//            @Transactional
+//            public CaminhaoExibicaoDto atualizar(CaminhaoCadastroDto caminhaoCadastroDto) {
+//                Caminhao caminhao = caminhaoRepository.findById(caminhaoCadastroDto.id())
+//                        .orElseThrow(() -> new CaminhaoNaoExisteException("Caminhão não encontrado."));
+//                BeanUtils.copyProperties(caminhaoCadastroDto, caminhao);
+//                return new CaminhaoExibicaoDto(caminhaoRepository.save(caminhao));
+//            }
+
 
 ////        Morador morador = moradorRepository.findById(moradorCadastroDto.id())
 ////                .orElseThrow(() -> new MoradorNaoExisteException("Morador não encontrado."));
