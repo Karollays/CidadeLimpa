@@ -1,9 +1,6 @@
 package br.com.fiap.cidadelimpa.advice;
 
-import br.com.fiap.cidadelimpa.exception.CaminhaoNaoExisteException;
-import br.com.fiap.cidadelimpa.exception.ColetaNaoExisteException;
-import br.com.fiap.cidadelimpa.exception.ImovelNaoExisteException;
-import br.com.fiap.cidadelimpa.exception.MoradorNaoExisteException;
+import br.com.fiap.cidadelimpa.exception.UsuarioNaoExisteException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.HashMap;
@@ -48,33 +44,33 @@ public class ApplicationExceptionHandler {
         return errorMap;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(CaminhaoNaoExisteException.class)
-    public Map<String, String> handleCaminhaoNaoExiste(CaminhaoNaoExisteException error) {
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("mensagem", error.getMessage());
-        return errorMap;
-    }
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(CaminhaoNaoExisteException.class)
+//    public Map<String, String> handleCaminhaoNaoExiste(CaminhaoNaoExisteException error) {
+//        Map<String, String> errorMap = new HashMap<>();
+//        errorMap.put("mensagem", error.getMessage());
+//        return errorMap;
+//    }
+//
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    @ExceptionHandler(ColetaNaoExisteException.class)
+//    public Map<String, String> handleColetaNaoExiste(ColetaNaoExisteException error) {
+//        Map<String, String> errorMap = new HashMap<>();
+//        errorMap.put("mensagem", error.getMessage());
+//        return errorMap;
+//    }
+//
+////    @ResponseStatus(HttpStatus.NOT_FOUND)
+////    @ExceptionHandler(ImovelNaoExisteException.class)
+////    public Map<String, String> handleImovelNaoExiste(ImovelNaoExisteException error) {
+////        Map<String, String> errorMap = new HashMap<>();
+////        errorMap.put("mensagem", error.getMessage());
+////        return errorMap;
+////    }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ColetaNaoExisteException.class)
-    public Map<String, String> handleColetaNaoExiste(ColetaNaoExisteException error) {
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("mensagem", error.getMessage());
-        return errorMap;
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ImovelNaoExisteException.class)
-    public Map<String, String> handleImovelNaoExiste(ImovelNaoExisteException error) {
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("mensagem", error.getMessage());
-        return errorMap;
-    }
-
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(MoradorNaoExisteException.class)
-    public Map<String, String> handleMoradorNaoExiste(MoradorNaoExisteException error) {
+    @ExceptionHandler(UsuarioNaoExisteException.class)
+    public Map<String, String> handleUsuarioNaoExiste(UsuarioNaoExisteException error) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("mensagem", error.getMessage());
         return errorMap;
