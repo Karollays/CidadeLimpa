@@ -7,6 +7,9 @@ import br.com.fiap.cidadelimpa.model.Imovel;
 import br.com.fiap.cidadelimpa.repository.ImovelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,21 +60,22 @@ public class ImovelService {
     }
 
     @Transactional(readOnly = true)
-    public List<ImovelExibicaoDto> listarImoveis() {
+    public Page<ImovelExibicaoDto> listarImoveis(Pageable paginacao) {
         return imovelRepository
-                .findAll()
-                .stream()
-                .map(ImovelExibicaoDto::new)
-                .toList();
+                .findAll(paginacao)
+                .map(ImovelExibicaoDto::new);
     }
 
     @Transactional(readOnly = true)
-    public List<ImovelExibicaoDto> buscarBairro(String bairro) {
-        List<Imovel> imoveis = imovelRepository.buscarBairro(bairro);
+    public Page<ImovelExibicaoDto> buscarBairro(String bairro, Pageable paginacao) {
+        Page<Imovel> imoveis = imovelRepository.buscarBairro(bairro, paginacao);
         if (imoveis.isEmpty()) {
             throw new ImovelNaoExisteException("Nenhum imóvel encontrado no bairro");
         }
-        return imoveis.stream().map(ImovelExibicaoDto::new).collect(Collectors.toList());
+        List<ImovelExibicaoDto> imoveisDto = imoveis.getContent().stream()
+                .map(ImovelExibicaoDto::new)
+                .collect(Collectors.toList());
+        return new PageImpl<>(imoveisDto, paginacao, imoveis.getTotalElements());
     }
 
     @Transactional
