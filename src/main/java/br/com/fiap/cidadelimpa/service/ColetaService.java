@@ -94,4 +94,27 @@ public class ColetaService {
                 .map(ColetaExibicaoDto::new)
                 .toList();
     }
+
+    //agendamento de coleta
+//    @Transactional
+//    public ColetaExibicaoDto agendarColeta(Long idCaminhao, Long idImovel, String tipoColeta, LocalDate dataColeta) {
+//        // Verifica se o caminhão e o imóvel existem no banco de dados
+//        Caminhao caminhao = caminhaoRepository.findById(idCaminhao)
+//                .orElseThrow(() -> new CaminhaoNaoExisteException("Caminhão não encontrado."));
+//        Imovel imovel = imovelRepository.findById(idImovel)
+//                .orElseThrow(() -> new ImovelNaoExisteException("Imóvel não encontrado."));
+//
+//        // Cria uma nova instância de Coleta
+//        Coleta coleta = new Coleta();
+//        coleta.setDataColeta(dataColeta);
+//        coleta.setTipoColeta(tipoColeta);
+//        coleta.setCaminhao(caminhao);
+//        coleta.setImovel(imovel);
+//
+//        // Salva a coleta agendada no banco de dados
+//        Coleta coletaAgendada = coletaRepository.save(coleta);
+//
+//        // Retorna a representação da coleta agendada
+//        return new ColetaExibicaoDto(coletaAgendada);
+//    }
 }
