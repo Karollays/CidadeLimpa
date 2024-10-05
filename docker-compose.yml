@@ -2,7 +2,7 @@ version: '3'
 
 services:
   app:
-    image: yourdockerhubusername/cidadelimpa:latest
+    image: karolinelays2021/cidadelimpa:latest
     container_name: cidadelimpa-app
     ports:
       - "8080:8080"
