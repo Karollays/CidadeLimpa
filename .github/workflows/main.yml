@@ -13,27 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Fazer o checkout do código-fonte
       - name: Check out the repository
         uses: actions/checkout@v2
 
+      # Configurar o JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: '17'
 
+      # Compilar o projeto com Maven
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean package -DskipTests
 
+      # Construir a imagem Docker com base no Dockerfile
       - name: Build Docker Image
         run: |
-          docker build -t myapp:latest .
+          docker build -t cidadelimpa:latest .
 
+      # Fazer login no Docker Hub e enviar a imagem
       - name: Push Docker Image to DockerHub
         run: |
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag myapp:latest yourdockerhubusername/myapp:latest
-          docker push yourdockerhubusername/myapp:latest
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker tag cidadelimpa:latest yourdockerhubusername/cidadelimpa:latest
+          docker push yourdockerhubusername/cidadelimpa:latest
 
+      # Subir o container para o ambiente de staging
       - name: Deploy to Staging
         run: |
           docker-compose -f docker-compose.yml up -d --build
