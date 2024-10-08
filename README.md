@@ -15,7 +15,7 @@ O projeto **Cidade Limpa** é uma aplicação Java desenvolvida para atender às
 4. 📆 **Gerenciamento de Agendamentos**: Permite a visualização, atualização e cancelamento dos agendamentos de coleta pelos usuários.
 5. 🔐 **Segurança dos Endpoints**: Implementa requisitos de segurança nos endpoints pertinentes utilizando o Spring Security.
 
-## Tecnologias necessárias
+## Tecnologias Necessárias
 - ☕ Java
 - 🚀 Spring Boot
 - 🔒 Spring Security
@@ -25,45 +25,45 @@ O projeto **Cidade Limpa** é uma aplicação Java desenvolvida para atender às
 
 ## Endpoints RESTful
 
-**USUÁRIO
- ➕ **POST http://localhost:8080/auth/register - Para registrar um novo usuário
- ➕ **POST http://localhost:8080/auth/login - Para logar com o novo usuário e recuperar o Token de acesso
- 🔄 **GET http://localhost:8080/api/usuarios/{usuarioId} - Listar usuário por ID
- ✏️ **PUT http://localhost:8080/api/usuarios - Alterar um usuário
- ❌ **DELETE http://localhost:8080/api/usuarios/{usuarioId} - Deletar um usuário
-
- **Utilizando o Token para todas as requisições
+### USUÁRIO
+- **➕ POST** `http://localhost:8080/auth/register` - Para registrar um novo usuário
+- **➕ POST** `http://localhost:8080/auth/login` - Para logar com o novo usuário e recuperar o Token de acesso
+- **🔄 GET** `http://localhost:8080/api/usuarios/{usuarioId}` - Listar usuário por ID
+- **✏️ PUT** `http://localhost:8080/api/usuarios` - Alterar um usuário
+- **❌ DELETE** `http://localhost:8080/api/usuarios/{usuarioId}` - Deletar um usuário
   
- **CAMINHÃO 
- ➕ **POST http://localhost:8080/api/caminhoes - Para criar caminhões
- 🔄 **GET http://localhost:8080/api/caminhoes/{caminhaoId} - Listar caminhoes por ID
- ✏️ **PUT http://localhost:8080/api/caminhoes - Alterar um caminhão
- ❌ **DELETE http://localhost:8080/api/caminhoes/{caminhaoId} - Deletar um caminhão
- ➕ **POST http://localhost:8080/api/caminhoes/{idCaminhao}/retirar-lixo/{idImovel}/organico - retirar lixo organico
- ➕ **POST http://localhost:8080/api/caminhoes/{idCaminhao}/retirar-lixo/{idImovel}/reciclavel - retirar lixo reciclavel
- ➕ **POST http://localhost:8080/api/caminhoes/descarregar - descarregar todos os caminhão
+#### Utilizar o Token para todas as requisições
 
- **COLETA
- 🔄 **GET http://localhost:8080/api/coletas/{coletaId} -  Recupera informações sobre a coleta de lixo u
- ➕ **POST http://localhost:8080/api/coletas - Agenda uma nova coleta.
- ✏️ **PUT http://localhost:8080/api/coletas - Atualiza um agendamento existente.
- ❌ **DELETE http://localhost:8080/api/coletas/{coletaId} - Cancela um agendamento de coleta.
+### CAMINHÃO
+- **➕ POST** `http://localhost:8080/api/caminhoes` - Para criar caminhões
+- **🔄 GET** `http://localhost:8080/api/caminhoes/{caminhaoId}` - Listar caminhões por ID
+- **✏️ PUT** `http://localhost:8080/api/caminhoes` - Alterar um caminhão
+- **❌ DELETE** `http://localhost:8080/api/caminhoes/{caminhaoId}` - Deletar um caminhão
+- **➕ POST** `http://localhost:8080/api/caminhoes/{idCaminhao}/retirar-lixo/{idImovel}/organico` - Retirar lixo orgânico
+- **➕ POST** `http://localhost:8080/api/caminhoes/{idCaminhao}/retirar-lixo/{idImovel}/reciclavel` - Retirar lixo reciclável
+- **➕ POST** `http://localhost:8080/api/caminhoes/descarregar` - Descarregar todos os caminhões
 
- **IMOVEL
- 🔄 **GET http://localhost:8080/api/imoveis/{imovelId} -  Recupera informações sobre um imovel 
- 🔄 **GET http://localhost:8080/api/imoveis - Lista todos imoveis
- 🔄 **GET http://localhost:8080/api/imoveis?bairro=Centro - Recupera imovel por bairro
- ➕ **POST http://localhost:8080/api/imoveis - Cria uma imovel.
- ➕ **POST http://localhost:8080/api/imoveis/lixo - Gera lixo no imovel
- ✏️ **PUT http://localhost:8080/api/imoveis - Atualiza um imovel existente.
- ❌ **DELETE http://localhost:8080/api/coletas/{imovelId} - Deleta imovel.
+### COLETA
+- **🔄 GET** `http://localhost:8080/api/coletas/{coletaId}` - Recupera informações sobre a coleta de lixo
+- **➕ POST** `http://localhost:8080/api/coletas` - Agenda uma nova coleta
+- **✏️ PUT** `http://localhost:8080/api/coletas` - Atualiza um agendamento existente
+- **❌ DELETE** `http://localhost:8080/api/coletas/{coletaId}` - Cancela um agendamento de coleta
 
- **MORADOR
- ➕ **POST http://localhost:8080/api/moradores - Cria um morador
- ✏️ **PUT http://localhost:8080/api/moradores - Atualiza um morador
- 🔄 **GET http://localhost:8080/api/moradores/{moradorId} - Busca um morador
- ❌ **DELETE http://localhost:8080/api/moradores/{moradorId} - Deleta um morador
- 🔄 **GET  http://localhost:8080/api/moradores - Lista os moradores
+### IMÓVEL
+- **🔄 GET** `http://localhost:8080/api/imoveis/{imovelId}` - Recupera informações sobre um imóvel
+- **🔄 GET** `http://localhost:8080/api/imoveis` - Lista todos os imóveis
+- **🔄 GET** `http://localhost:8080/api/imoveis?bairro=Centro` - Recupera imóvel por bairro
+- **➕ POST** `http://localhost:8080/api/imoveis` - Cria um imóvel
+- **➕ POST** `http://localhost:8080/api/imoveis/lixo` - Gera lixo no imóvel
+- **✏️ PUT** `http://localhost:8080/api/imoveis` - Atualiza um imóvel existente
+- **❌ DELETE** `http://localhost:8080/api/coletas/{imovelId}` - Deleta um imóvel
+
+### MORADOR
+- **➕ POST** `http://localhost:8080/api/moradores` - Cria um morador
+- **✏️ PUT** `http://localhost:8080/api/moradores` - Atualiza um morador
+- **🔄 GET** `http://localhost:8080/api/moradores/{moradorId}` - Busca um morador
+- **❌ DELETE** `http://localhost:8080/api/moradores/{moradorId}` - Deleta um morador
+- **🔄 GET** `http://localhost:8080/api/moradores` - Lista os moradores
 
 ## Instalação e Uso
 1. 📂 Clone este repositório: `git clone https://github.com/Karollays/cidadeLimpa.git`
